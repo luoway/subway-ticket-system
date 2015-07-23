@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="src/style.css" />
+    <title>欢迎使用地铁自动售票系统</title>
+</head>
+<style>
+    li {list-style:none;}
+    .home_enter{
+        display: block;
+        height: 80px;
+        line-height: 80px;
+        width: 180px;
+        border: 0;
+        border-radius: 10px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #38b1b7;
+        font-size: 35px;
+        cursor: pointer;
+    }
+    label:hover{
+        background-color: #00ccff;
+    }
+</style>
+<body>
+<div id="container">
+    <div id="header">
+        <h1>地铁自动售票系统</h1>
+    </div>
+    <div id="enter">
+        <h1>欢迎使用地铁自动售票系统
+        <br><br><br><br></h1>
+            <ul style="margin:auto;width:210px">
+                <li>
+                    <input value="进入购票" type="button" style="display: none;" onclick="setUrl()" id="goto"/>
+                    <label class="home_enter" for="goto">进入购票</label>
+                </li>
+            </ul>
+        <h4>您当前所在的起始站点为 <b id="start"></b> 站点</h4>
+    </div>
+    <div id="image">
+        <img src="src/way.jpg" alt="地铁站点地图：A-B-C-D-E-F" width="250" height="500"/>
+    </div>
+    <div id="htime">
+        <h3 style="font-size:180%;"  id="demo"></h3>
+    </div>
+    <div id="footer">高级语言程序设计大作业 2014</div>
+
+</div>
+</body>
+
+<script>
+    var StartStation="C";
+    document.getElementById("start").innerHTML=StartStation;
+    function setUrl(){
+        window.location.replace("src/page1.html?"+"SS="+StartStation);
+    }
+</script>
+
+<script>
+    var d=new Date();
+    var weekday=new Array(7);
+    weekday[0]="周日";
+    weekday[1]="周一";
+    weekday[2]="周二";
+    weekday[3]="周三";
+    weekday[4]="周四";
+    weekday[5]="周五";
+    weekday[6]="周六";
+    document.getElementById("demo").innerHTML= d.getFullYear() +"年" +
+                                                   (d.getMonth()-(-1)) +"月" +//对d.getMonth()作+1修正
+                                                   d.getDate() +"日 " +
+                                                   d.toLocaleTimeString() +" " +weekday[d.getDay()];
+    var myVar=setInterval(function(){myTimer()},1000);
+    function myTimer(){
+        d=new Date();
+        document.getElementById("demo").innerHTML=d.getFullYear() +"年" +(d.getMonth() -(-1))  +"月" +d.getDate() +"日 " +d.toLocaleTimeString() +" " +weekday[d.getDay()];
+    }
+</script>
+</html>

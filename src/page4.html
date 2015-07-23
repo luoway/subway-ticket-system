@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>欢迎使用地铁自动售票系统</title>
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <h1>投币找零</h1>
+    </div>
+    <div id="chapter">
+        <h4>您当前所在的起始站点为<b id="here"></b>站点</h4>
+        <p><strong>交易进行中</strong></p>
+        <ul>
+            <li>选择目的站点</li>
+            <li>购买车票</li>
+            <li><b>投币找零</b></li>
+            <li>打印车票</li>
+        </ul>
+        <p>交易结束</p>
+    </div>
+
+    <div  id="work">
+        <fieldset><legend><b style="font-size:1.3em;line-height:300%">找零</b></legend>
+            <p style="text-indent: 13em;" ><b>正在为您找零<input id="rb" type="text" readonly style="text-align: right;width: 50px;border:1px;border-bottom-style:none;border-top-style:none;border-left-style:none;border-right-style:none;"/> 元</b></p>
+            <p style="text-indent: 16em;" ><b>已找零<input id="out" value="0" type="text" readonly style="text-align: right;width: 50px;border:1px;border-bottom-style:none;border-top-style:none;border-left-style:none;border-right-style:none;"/> 元</b></p>
+            <p style="text-indent: 13em;" id="t">&nbsp;</p>
+            <p style="text-indent: 42%;" ><input type="button" onclick="zl()" value="点击继续" id="zl"></p>
+            <p style="line-height: 300%;text-align: center;padding-right: 10%" id="paid">&nbsp;</p>
+        </fieldset>
+    </div>
+
+    <div id="time">
+        <h3 id="demo"></h3>
+    </div>
+
+    <div id="cq2">
+        <p></p>
+        <p  style="text-indent: 42%">
+            <input type="button" onclick="Cancel()" disabled value="取消购票" id="cancel">
+        </p>
+    </div>
+    <div id="footer">高级语言程序设计大作业 2014</div>
+</div>
+
+</body>
+
+<script src="GetRequest.js"></script>
+<script src="time.js"></script>
+
+<script>
+    document.getElementById("here").innerHTML=SS;
+    document.getElementById("rb").value=Zhaoling;
+    var x=document.getElementById('rb').value;
+    var tout=0;
+    var bi=[100,50,20,10,5,1];
+    var i=0;
+    function zl(){
+        document.getElementById("zl").setAttribute("disabled","true");
+        document.getElementById("t").innerHTML ="<b>正在为您找零，请稍后……</b>";
+        if(i<bi.length){
+            if(x<bi[i]){
+                i++;
+                setTimeout("zl()", 500);
+            }
+            else{
+                tout += bi[i];
+                x -= bi[i];
+                document.getElementById('out').value = tout.toFixed(2);
+                setTimeout(zl,500);
+            }
+            
+        }
+        if(document.getElementById("rb").value==document.getElementById('out').value){
+            document.getElementById("t").innerHTML ="<b>找零结束。</b>";
+            document.getElementById("zl").setAttribute("value"," 下一步 ");
+            document.getElementById("paid").innerHTML="<b>您已付款"+total+"元，点击“取消购票”将退回您的付款。</b>";
+            document.getElementById("zl").setAttribute("onclick","Toprint()");
+            document.getElementById("zl").removeAttribute("disabled");
+            document.getElementById("cancel").removeAttribute("disabled");
+        }
+    }
+    function Toprint(){
+        window.location.replace('../src/page5.html?'+"SS="+SS+'&'
+                +"ES="+ES+'&'
+                +"Price="+Price+'&'
+                +"num="+num+'&'
+                +"total="+total);
+    }
+</script>
+
+<script>
+    function Cancel(){
+        if(!parseInt(total)){window.location.replace('../index.html')}
+        else {
+            window.location.replace('../src/page6.html?' + "SS=" + SS + '&' + "total=" + total)
+        }
+    }
+</script>
+</html>

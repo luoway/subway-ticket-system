@@ -1,0 +1,139 @@
+<!DOCTYpE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>欢迎使用地铁自动售票系统</title>
+</head>
+
+<style>
+    #info
+    {
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        width:90%;margin:0 auto;
+        border-collapse:collapse;
+    }
+
+    #info td, #info th
+    {
+        text-align:center;
+        border:1px solid #98bf21;
+        padding:0 7px 0 7px;
+    }
+
+    #info th
+    {
+        font-size:1.1em;
+        text-align:center;
+        padding-top:1px;
+        padding-bottom:1px;
+        background-color:#A7C942;
+        color:#ffffff;
+    }
+
+    #info td.alt
+    {
+        color:#000000;
+        background-color:#EAF2D3;
+    }
+</style>
+
+<body>
+<div id="container">
+    <div id="header">
+        <h1>打印车票</h1>
+    </div>
+    <div id="chapter">
+        <h4>您当前所在的起始站点为<b id="here"></b>站点</h4>
+        <p><strong>交易进行中</strong></p>
+        <ul>
+            <li>选择目的站点</li>
+            <li>购买车票</li>
+            <li>投币找零</li>
+            <li><b>打印车票</b></li>
+        </ul>
+        <p>交易结束</p>
+    </div>
+
+    <div id="work">
+        <p style="line-height: 0">&nbsp;</p>
+            <table  id="info">
+                <tr><th colspan="8">请确认打印车票信息</th></tr>
+                <tr>
+                    <td class="alt" width="20%"><b>始站</b></td>
+                    <td width="30%"><b id="StartS"></b></td>
+                    <td class="alt" width="20%"><b>终站</b></td>
+                    <td width="30%"><b id="EndS"></b></td>
+                </tr>
+                <tr>
+                    <td class="alt"><b>票价</b></td><td><b id="Pri"></b></td>
+                    <td class="alt"><b>数目</b></td><td><b id="num"></b></td>
+                </tr>
+                <tr>
+                    <td class="alt"><b>合计</b></td><td colspan="3"><b id="total"></b></td>
+                </tr>
+            </table>
+
+        <p  style="text-indent: 42%"><input type="button" id="startprint" onclick="StartPrint()" style="text-align: center" value="开始打印"/></p>
+        <p id="chupiao">&nbsp;</p>
+        <p id="fangzhen">
+            <input type="button" id="right" style="display:none" onclick="finalR()" value="Right"/>
+            <input type="button" id="wrong" style="display:none" onclick="finalW()" value="Wrong"/></p>
+        <p id="fin">&nbsp;</p>
+    </div>
+
+    <div id="time">
+        <h3 id="demo"></h3>
+    </div>
+
+    <div id="cq2">
+        <p></p>
+        <p  style="text-indent: 42%">
+            <input type="button" onclick="Cancel()" id="cancel" value="取消购票">
+        </p>
+    </div>
+    <div id="footer">高级语言程序设计大作业 2014</div>
+</div>
+</body>
+
+<script src="GetRequest.js"></script>
+<script src="time.js"></script>
+
+<script>
+    document.getElementById("here").innerHTML=SS;
+    function Cancel(){
+        if(!parseInt(total)){window.location.replace('../index.html')}
+        else {
+            window.location.replace('../src/page6.html?' + "SS=" + SS + '&' + "total=" + total)
+        }
+    }
+</script>
+
+<script>
+    document.getElementById("StartS").innerHTML=SS;
+    document.getElementById("EndS").innerHTML=ES;
+    document.getElementById("Pri").innerHTML=Price+"元";
+    document.getElementById("num").innerHTML=num;
+    document.getElementById("total").innerHTML=total+"元";
+    function StartPrint(){
+        document.getElementById("cancel").setAttribute("disabled","true");
+        document.getElementById("startprint").setAttribute("disabled","true");
+        document.getElementById("chupiao").innerHTML = "<b>正在为您打印车票</b>（此处通过点击“Right”“Wrong”仿真出票结果）";
+        // 这种代码不好。。。
+        // 样式分离
+        document.getElementById("right").removeAttribute("style");
+        document.getElementById("wrong").removeAttribute("style");
+    }
+    function finalR(){
+        document.getElementById("cancel").setAttribute("disabled","true");
+        document.getElementById("wrong").setAttribute("disabled","true");
+        document.getElementById("fin").innerHTML = "<b>打印成功，请取走您的车票！</b>";
+        setTimeout("window.location.replace('../index.html')",4000);
+    }
+    function finalW(){
+        document.getElementById("right").setAttribute("disabled","true");
+        document.getElementById("cancel").removeAttribute("disabled");
+        document.getElementById("fin").innerHTML = "<b>打印失败，请点击“取消购票”退还您的付款！</b>";
+    }
+</script>
+</html>

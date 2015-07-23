@@ -1,0 +1,102 @@
+﻿<!DOCTYpE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>欢迎使用地铁自动售票系统</title>
+</head>
+<body>
+
+<div id="container">
+    <div id="header">
+        <h1>购买车票</h1>
+    </div>
+    <div id="chapter">
+        <h4>您当前所在的起始站点为<b id="here"></b>站点</h4>
+        <p><strong>交易进行中</strong></p>
+        <ul>
+            <li>选择目的站点</li>
+            <li><b>购买车票</b></li>
+            <li>投币找零</li>
+            <li>打印车票</li>
+        </ul>
+        <p>交易结束</p>
+    </div>
+
+    <div id="work">
+        <fieldset><legend><b style="font-size:1.3em;line-height:300%">购买车票</b></legend>
+        <br>
+        <p  style="text-indent: 13em"><b>票&nbsp;&nbsp;&nbsp;&nbsp;价：</b>
+            <input id=pri value="" style="width: 80px"  readonly/><b> 元</b>
+        </p>
+        <p  style="text-indent: 13em"><b>数&nbsp;&nbsp;&nbsp;&nbsp;量：</b>
+            <input id=num value="1" style="width: 80px" maxlength="4" onkeyup="myf();" onpaste="myf();" oncut="myf();" ondrop="myf();" onchange="myf();"/>
+
+        </p>
+        <p  style="text-indent: 13em"><b>合&nbsp;&nbsp;&nbsp;&nbsp;计：</b>
+            <input id=tot style="width: 80px" readonly/><b> 元</b></p>
+
+        <p  style="text-indent: 17em">
+            <input id="submit2" type="button" onClick="submit2();" value="确定购买"></p>
+        <p style="line-height:150%">&nbsp;</p>
+        </fieldset>
+
+    </div>
+    <div id="time">
+        <h3 id="demo"></h3>
+    </div>
+
+    <div id="cq2">
+        <p></p>
+        <p  style="text-indent: 15em">
+            <input type="button" onclick="window.location.replace('../src/page1.html?'+'SS='+SS)"  value="返回上步">
+            &nbsp;&nbsp;&nbsp;
+            <input type="button" onclick="Exit()" value="退出购票">
+        </p>
+    </div>
+    <div id="footer">高级语言程序设计大作业 2014</div>
+</div>
+</body>
+
+<script src="GetRequest.js"></script>
+<script src="time.js"></script>
+
+<script>
+    document.getElementById("here").innerHTML=SS;
+    document.getElementById("pri").value=Price;
+    document.getElementById("tot").value=Price;
+    function myf() {
+        var x = document.getElementById("num").value;
+        if (isNaN(x) || x>2000 || x<1 || x%1>0 ) {
+            if(x.length==0){
+                document.getElementById("submit2").setAttribute("disabled","disabled");
+                x=0;
+                var fix=document.getElementById("pri").value * x;
+                document.getElementById("tot").value=fix.toFixed(2);}
+            else{
+                alert('只能输入2000以下的正整数');
+                document.getElementById("num").value=1;
+                myf();
+            }
+        }
+        else{
+            document.getElementById("submit2").removeAttribute("disabled");
+            fix=document.getElementById("pri").value*document.getElementById("num").value;
+            document.getElementById("tot").value=fix.toFixed(2);
+        }
+    }
+    function submit2(){
+        window.location.replace('../src/page3.html?'+"SS="+SS+'&'
+                +"ES="+ES+'&'
+                +"Price="+Price+'&'
+                +"num="+document.getElementById("num").value+'&'
+                +"total="+document.getElementById("tot").value);
+    }
+</script>
+
+<script>
+    function Exit(){
+        window.location.replace('../index.html')
+    }
+</script>
+</html>

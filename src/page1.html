@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>欢迎使用地铁自动售票系统</title>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>选择目的站点</h1>
+        </div>
+        <div id="chapter">
+            <h4>您当前所在的起始站点为<b id="here"></b>站点</h4>
+            <p><strong>交易进行中</strong></p>
+            <ul>
+                <li><b>选择目的站点</b></li>
+                <li>购买车票</li>
+                <li>投币找零</li>
+                <li>打印车票</li>
+            </ul>
+            <p>交易结束</p>
+         </div>
+
+        <div id="choose">
+            <fieldset>
+                <legend><b style="font-size:1.3em;line-height:300%">请选择目的站点</b></legend>
+                <h5 id="F"><input type="radio" name="station" value="6">F<br></h5>
+                <h5 id="E"><input type="radio" name="station" value="5">E<br></h5>
+                <h5 id="D"><input type="radio" name="station" value="4">D<br></h5>
+                <h5 id="C"><input type="radio" name="station" value="3">C<br></h5>
+                <h5 id="B"><input type="radio" name="station" value="2">B<br></h5>
+                <h5 id="A"><input type="radio" name="station" value="1">A<br></h5>
+                <br>
+            </fieldset>
+        </div>
+
+        <div id="image">
+        <img src="../src/way.jpg" alt="地铁站点地图：A-B-C-D-E-F" width="250" height="500"/>
+        </div>
+
+        <div id="time">
+            <h3 id="demo"></h3>
+        </div>
+
+        <div id="cq1">
+            <p></p>
+            <p  style="text-indent: 7em">
+            <input type="button" onclick="submit()" value="下一步">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" onclick="Exit()" value="退出购票"></p>
+
+        </div>
+        <div id="footer">高级语言程序设计大作业 2014</div>
+    </div>
+    <script src="GetRequest.js"></script>
+    <script src="time.js"></script>
+    <script>
+        document.getElementById("here").innerHTML=SS;
+        switch (SS){
+            case 'F':document.getElementById("F").style.display= 'none';start=6;break;
+            case 'E':document.getElementById("E").style.display= 'none';start=5;break;
+            case 'D':document.getElementById("D").style.display= 'none';start=4;break;
+            case 'C':document.getElementById("C").style.display= 'none';start=3;break;
+            case 'B':document.getElementById("B").style.display= 'none';start=2;break;
+            default :document.getElementById("A").style.display= 'none';start=1;
+        }
+        function pay(){
+            var radio=document.getElementsByName("station");
+            for(var i=0;i<radio.length;i++){
+                if(radio[i].checked==true){
+                    var des=radio[i].value;
+                    ES=document.getElementsByTagName('h5')[i].innerHTML.charAt(45);
+                    var fprice=Math.abs(des-start)*2;
+                    var price=fprice.toFixed(2);
+                    break;
+                }
+            }
+            return price;
+        }
+        function submit(){
+            if(Price=pay()){
+                window.location.replace('../src/page2.html?'+"SS="+SS+'&'+"ES="+ES+'&'+"Price="+Price);
+            }else{
+                alert("请选择！")
+            }
+        }
+        function Exit(){
+            window.location.replace('../index.html');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+*{font-family: "微软雅黑";}
+html,body{margin: 0;padding: 0;}
+div#container{width:1000px;height:500px;margin:0 auto;}
+div#header {background-color:#4e7da6;}
+div#enter {background-color: #e8ff8c;height:420px;width:700px;float:left;}
+div#chapter {background-color: #eef26d;height:420px;width:300px;float:left;}
+div#choose {background-color: #fffbee;height:420px;width:400px;float:left;}
+div#image {background-color: #f2f2f2;text-align:center;height:500px;width:300px;float:right;}
+div#work {background-color: #fffbee;height:420px;width:700px;float:right;}
+div#htime {background-color: #f27405;height:80px;width:700px;float:left;}
+div#time {background-color: #f27405;height:80px;width:300px;float:left;}
+div#cq1 {background-color: #f24535;height:80px;width:400px;float:left;}
+div#cq2 {background-color: #f24535;height:80px;width:700px;float:left;}
+div#footer {background-color:#4e7da6;clear:both;text-align:center;height:35px;}
+body {font-size:1em;line-height:250%}
+p {text-indent: 2em;}
+h1 {margin-bottom:0;text-align: center;}
+h2 {font-size:18px;text-align: center;}
+h3 {margin:20px;text-align: center;font-size:2em;}
+h4 {text-align: center;font-size:1.2em;line-height:60%}
+h5 {text-indent: 3em;font-size:1em;line-height:150%;}
+ul {margin:10px;}
+
+
+
+
